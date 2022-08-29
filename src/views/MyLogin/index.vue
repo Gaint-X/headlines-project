@@ -6,13 +6,13 @@
         v-model="info.mobile"
         label="手机号"
         placeholder="请输入手机号码"
-        :rules="[{ required: true, message: '请填写手机号码' }]"
+        :rules="rules.mobile"
       />
       <van-field
         v-model="info.code"
         label="验证码"
         placeholder="请输入验证码"
-        :rules="[{ required: true, message: '请填写验证码' }]"
+        :rules="rules.code"
       />
       <div style="margin: 16px">
         <van-button
@@ -38,6 +38,16 @@ export default {
       info: {
         mobile: "",
         code: "",
+      },
+      rules: {
+        mobile: [
+          { required: true, message: "请填写手机号码" },
+          { pattern: /^1[3-9]\d{9}$/, message: "请填写正确手机号码" },
+        ],
+        code: [
+          { required: true, message: "请填写验证码" },
+          { pattern: /^\d{6}$/, message: "请填写6位有效的验证码" },
+        ],
       },
     }
   },

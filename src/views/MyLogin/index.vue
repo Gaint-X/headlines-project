@@ -29,9 +29,18 @@
 </template>
 
 <script>
+import { loginAPI } from "@/api/user"
 export default {
   methods: {
-    onSubmit() {},
+    async onSubmit() {
+      try {
+        const res = await loginAPI(this.info)
+        console.log(res)
+        this.$toast.success("登录成功")
+      } catch {
+        this.$toast.fail("验证码错误")
+      }
+    },
   },
   data() {
     return {

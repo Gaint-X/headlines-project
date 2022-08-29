@@ -18,7 +18,9 @@
         <van-button
           round
           block
+          :loading="isLoading"
           type="info"
+          loading-text="加载中..."
           native-type="submit"
           color="linear-gradient(90deg, #ff6034, #ee0a24)"
           >提交</van-button
@@ -33,12 +35,15 @@ import { loginAPI } from "@/api/user"
 export default {
   methods: {
     async onSubmit() {
+      this.isLoading = true
       try {
         const res = await loginAPI(this.info)
         console.log(res)
         this.$toast.success("登录成功")
       } catch {
         this.$toast.fail("验证码错误")
+      } finally {
+        this.isLoading = false
       }
     },
   },
@@ -58,6 +63,7 @@ export default {
           { pattern: /^\d{6}$/, message: "请填写6位有效的验证码" },
         ],
       },
+      isLoading: false,
     }
   },
 }

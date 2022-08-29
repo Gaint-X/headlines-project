@@ -39,7 +39,7 @@ export default {
       try {
         const res = await loginAPI(this.info)
         console.log(res)
-        this.$toast.success("登录成功")
+        this.$toast.success("登陆成功")
       } catch {
         this.$toast.fail("验证码错误")
       } finally {

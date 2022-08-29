@@ -31,20 +31,14 @@
 </template>
 
 <script>
-import { loginAPI } from "@/api/user"
 export default {
   methods: {
     async onSubmit() {
       this.isLoading = true
-      try {
-        const res = await loginAPI(this.info)
-        console.log(res)
-        this.$toast.success("登陆成功")
-      } catch {
-        this.$toast.fail("验证码错误")
-      } finally {
-        this.isLoading = false
-      }
+      //将登录请求交给vuex
+      await this.$store.dispatch("login", this.info)
+
+      this.isLoading = false
     },
   },
   data() {
